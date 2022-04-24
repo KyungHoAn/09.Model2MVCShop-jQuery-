@@ -70,7 +70,7 @@
 			//alert("phone : "+value)
 			$("input:hidden[name='phone']").val( value );
 			
-			//document.detailForm.action='/user/addUser';
+			//document.detailForm.action='/user/addUser'; 
 			//document.detailForm.submit();
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
@@ -92,6 +92,7 @@
 				document.detailForm.reset();
 		}========================================	*/
 		//==> 추가된부분 : "취소"  Event 처리 및  연결
+		//<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
