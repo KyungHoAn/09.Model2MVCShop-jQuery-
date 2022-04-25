@@ -112,6 +112,7 @@ public class ProductController {
 				
 			}
 		}
+		cookie.setPath("/");
 		cookie.setMaxAge(-1);
 		response.addCookie(cookie);
 		

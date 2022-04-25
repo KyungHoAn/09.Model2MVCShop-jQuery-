@@ -54,12 +54,22 @@
 			$(".Depth03:contains('판매상품등록')").on("click",function(){
 				$(window.parent.frames["rightFrame"].document.location).attr("href","../product/addProductView.jsp");
 			});
-			
 			$(".Depth03:contains('판매상품관리')").on("click",function(){
-				$(window.parent.frames["rightFrame"].document.location).attr("href","/listProduct.do?menu=manage");
-			});				 
+				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=manage");
+			});
+			$(".Depth03:contains('상품검색')").on("click",function(){
+				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=search");
+			});
+				 
+			$(".Depth03:contains('구매이력조회')").on("click",function(){
+				$(window.parent.frames["rightFrame"].document.location).attr("href","/listPurchase.do"); 
+			});
+				 
+			$(".Depth03:contains('최근본상품')").on("click",function(){
+				history(); 
+			});	 
 		 });
-		 
+		 		 
 		 //상품검색
 		 //<td class="Depth03">
 		 //<a href="/listProduct.do?menu=search" target="rightFrame">상 품 검 색</a>
@@ -70,19 +80,7 @@
 		 
 		 //최근본상품
 		 //<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>
-		 $(function(){
-			 $(".Depth03:contains('삼품검색')").on("click",function(){
-				$(window.parent.frames["rightFrame"].document.location).attr("href","/listProduct.do?menu=search"); 
-			 });
-			 
-			 $(".Depth03:contains('구매이력조회')").on("click",function(){
-				$(window.parent.frames["rightFrame"].document.location).attr("href","/listPurchase.do"); 
-			 });
-			 
-			 $(".Depth03:contains('최근본상품')").on("click",function(){
-				history.go(-1); 
-			 });
-		 })
+		 
 		 
 	</script>
 	

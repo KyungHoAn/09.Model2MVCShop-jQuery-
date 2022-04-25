@@ -15,7 +15,7 @@
 	//<a href="/purchase/addPurchaseView?prodNo=${product.prodNo}">备概</a>
 	$(function(){
 		$("td.ct_btn01:contains('备概')").on("click", function(){
-			self.location="/purchase/addPurchaseView?prodNo="+$(this).text().trim();
+			self.location="/purchase/addPurchaseView?prodNo="+${prodNo};
 		})
 	})
 </script>
@@ -132,7 +132,8 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="/purchase/addPurchaseView?prodNo=${product.prodNo}">备概</a>
+						<!-- <a href="/purchase/addPurchaseView?prodNo=${product.prodNo}">备概</a> -->
+						备概
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

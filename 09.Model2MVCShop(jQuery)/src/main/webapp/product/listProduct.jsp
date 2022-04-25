@@ -18,40 +18,44 @@
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 
 	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
 	function fncGetProductList(currentPage) {
-		//document.getElementById("currentPage").value = currentPage;
-		$("#currentPage").val(currentPage)
-		//document.detailForm.submit();
-		//$("form").attr("method","POST").attr("action","/product/listProduct?menu=$(param.menu)").submit();
-		$("form").attr("method","POST").attr("action","/product/listProduct?menu="+$(this).text().trim()).submit();
+		
+		
+		$("$currentPage").val(currentPage)
+		$("form").attr("method","POST").attr("action","/product/listProduct?menu"+$(menu)).submit();
 	}
 	
-	
-	//<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-	//<!-- <a href="javascript:fncGetProductList('1');">검색</a> -->
 	$(function(){
-		$("td.ct_btn01:contains('검색')").on("click", function(){
+		$("td.cd_btn01:contains('검색')").on("click",function(){
 			fncGetProductList(1);
 		});
 		
-	//<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
-		
-	//<a href="/product/getProduct?prodNo=${product.prodNo}">${product.prodName}</a>
-	
-		$(".ct_list_pop td:nth-child(3)").on("click",function(){
-			self.location="/product/updateProduct?prodNo="+$(this).text().trim();
+		$(".ct_list_pop c:when").on("click", function(){
+			self.location="/product/updateProduct?prodNo="+${prodNo};
 		});
 		
-		$(".ct_list_pop td:nth-child(3)").on("click",function(){
-			self.location="/product/getProduct?prodNo="+$(this).text().trim();
-		});
-		
-		$(".ct_list_pop td:nth-child(3)").css("color","red");
-		$("h7").css("color","red");
+		$(".ct_lit_pop c:otherwise").on("click" function(){
+			self.location="/product/getProduct?prodNo="+${prodNo};
+		})
 	});
+	/*
+	<td align="center">${i}</td>
+	<td></td>
+	<td align="left"><c:choose>
+			<c:when test="${param.menu eq 'manage' }">
+			<!-- 
+				<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
+				-->
+				${product.prodName }
+			</c:when>
+			<c:otherwise>
+				<!-- <a href="/product/getProduct?prodNo=${product.prodNo}"></a> -->
+				${product.prodName}
+	*/
 	
 </script>
 
@@ -61,7 +65,8 @@
 
 	<div style="width: 98%; margin-left: 10px;">
 
-		<!-- <form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post"> -->
+		<!-- <form name="detailForm"	action="/product/listProduct?menu=${param.menu}" method="post"> -->
+		<form name="detailForm">
 
 			<table width="100%" height="37" border="0" cellpadding="0"
 				cellspacing="0">
@@ -102,7 +107,7 @@
 									src="/images/ct_btnbg01.gif" width="17" height="23" /></td>
 								<td background="/images/ct_btnbg02.gif" class="ct_btn01"
 									style="padding-top: 3px;">
-									<!-- <a href="javascript:fncGetProductList('1');">검색</a> -->
+									<!-- <a href="javascript:fncGetUserList('1');">검색</a> -->
 									검색
 									</td>
 								<td width="14" height="23"><img
@@ -142,7 +147,9 @@
 						<td></td>
 						<td align="left"><c:choose>
 								<c:when test="${param.menu eq 'manage' }">
-									<!-- <a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a> -->
+								<!-- 
+									<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
+									-->
 									${product.prodName }
 								</c:when>
 								<c:otherwise>
@@ -184,7 +191,8 @@
 			<% }else{ %>
 					<a href="javascript:fncGetProductList('<%=resultPage.getEndUnitPage()+1%>')">이후 ▶</a>
 			<% } %>
-		 --%> <jsp:include page="../common/pageNavigator.jsp" /></td>
+		 	--%> 
+		 <jsp:include page="../common/pageNavigator.jsp" /></td>
 				</tr>
 			</table>
 			<!-- PageNavigation End... -->
