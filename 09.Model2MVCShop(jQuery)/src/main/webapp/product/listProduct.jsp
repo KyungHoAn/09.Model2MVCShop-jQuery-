@@ -23,39 +23,34 @@
 
 	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
 	function fncGetProductList(currentPage) {
-		
-		
-		$("$currentPage").val(currentPage)
+		$("#currentPage").val(currentPage)
 		$("form").attr("method","POST").attr("action","/product/listProduct?menu"+$(menu)).submit();
 	}
 	
 	$(function(){
+		
 		$("td.cd_btn01:contains('검색')").on("click",function(){
 			fncGetProductList(1);
 		});
 		
-		$(".ct_list_pop c:when").on("click", function(){
-			self.location="/product/updateProduct?prodNo="+${prodNo};
+		//var prodNo = document.querySelector('#prodNumber');
+		//var prodNo = document.getElementById('prodNumber');
+		//let prodNo = document.getElementById('prodNumber');
+		//const prodNo = document.querySelector("#prodNumber");
+		//console.log(prodNo);
+		
+		//<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
+		$(".ct_list_pop td:nth-child(3)").on("click", function(){
+			self.location="/product/updateProduct?prodNo="+$(this).text().trim();
 		});
 		
-		$(".ct_lit_pop c:otherwise").on("click" function(){
-			self.location="/product/getProduct?prodNo="+${prodNo};
-		})
+		$(".ct_list_pop td:nth-child(3)").on("click", function(){
+			var prodNo = $(this).data("value");
+			//var prodNo = document.querySelector('#prodNumber');
+			console.log(prodNo);
+			self.location="/product/getProduct?prodNo="+prodNo;
+		});
 	});
-	/*
-	<td align="center">${i}</td>
-	<td></td>
-	<td align="left"><c:choose>
-			<c:when test="${param.menu eq 'manage' }">
-			<!-- 
-				<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
-				-->
-				${product.prodName }
-			</c:when>
-			<c:otherwise>
-				<!-- <a href="/product/getProduct?prodNo=${product.prodNo}"></a> -->
-				${product.prodName}
-	*/
 	
 </script>
 
@@ -145,17 +140,18 @@
 					<tr class="ct_list_pop">
 						<td align="center">${i}</td>
 						<td></td>
-						<td align="left"><c:choose>
-								<c:when test="${param.menu eq 'manage' }">
-								<!-- 
-									<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
-									-->
-									${product.prodName }
+						<td align="left" id="prodNumber" data-value="${product.prodNo}">
+						<c:choose>
+								<c:when test="${param.menu eq 'manage'}">
+								<!--<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>-->
+									${product.prodName}
 								</c:when>
+								
 								<c:otherwise>
 									<!-- <a href="/product/getProduct?prodNo=${product.prodNo}"></a> -->
 									${product.prodName}
-								</c:otherwise>
+						</c:otherwise>
+								
 							</c:choose></td>
 						<td></td>
 						<td align="left">${product.price}</td>
@@ -175,23 +171,7 @@
 				style="margin-top: 10px;">
 				<tr>
 					<td align="center"><input type="hidden" id="currentPage"
-						name="currentPage" value="" /> <%--
-			<% if( resultPage.getCurrentPage() <= resultPage.getPageUnit() ){ %>
-					◀ 이전
-			<% }else{ %>
-					<a href="javascript:fncGetProductList('<%=resultPage.getCurrentPage()-1%>')">◀ 이전</a>
-			<% } %>
-
-			<%	for(int i=resultPage.getBeginUnitPage();i<= resultPage.getEndUnitPage() ;i++){	%>
-					<a href="javascript:fncGetProductList('<%=i %>');"><%=i %></a>
-			<% 	}  %>
-	
-			<% if( resultPage.getEndUnitPage() >= resultPage.getMaxPage() ){ %>
-					이후 ▶
-			<% }else{ %>
-					<a href="javascript:fncGetProductList('<%=resultPage.getEndUnitPage()+1%>')">이후 ▶</a>
-			<% } %>
-		 	--%> 
+						name="currentPage" value="" />
 		 <jsp:include page="../common/pageNavigator.jsp" /></td>
 				</tr>
 			</table>
