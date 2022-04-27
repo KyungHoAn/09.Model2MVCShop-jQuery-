@@ -1,17 +1,6 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%--
-<%
-	String menu = request.getParameter("menu");
-	List<Product> list= (List<Product>)request.getAttribute("list");
-	Page resultPage=(Page)request.getAttribute("resultPage");
-	
-	Search search = (Search)request.getAttribute("search");
-	//==> null 을 ""(nullString)으로 변경
-	String searchCondition = CommonUtil.null2str(search.getSearchCondition());
-	String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
-%>
- --%>
+
 <html>
 <head>
 <title>상품 목록 조회</title>
@@ -22,15 +11,16 @@
 <script type="text/javascript">
 
 	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
-	function fncGetProductList(currentPage) {
+	function fncGetUserList(currentPage) {
 		$("#currentPage").val(currentPage)
-		$("form").attr("method","POST").attr("action","/product/listProduct?menu"+$(menu)).submit();
+		$("form").attr("method","POST").attr("action","/product/listProduct?menu=${param.menu}").submit();
+		
 	}
-	
+	//<!-- <a href="javascript:fncGetUserList('1');">검색</a> -->
 	$(function(){
 		
-		$("td.cd_btn01:contains('검색')").on("click",function(){
-			fncGetProductList(1);
+		$("td.ct_btn01:contains('검색')").on("click",function(){
+			fncGetUserList(1);
 		});
 		
 		//var prodNo = document.querySelector('#prodNumber');
@@ -40,16 +30,35 @@
 		//console.log(prodNo);
 		
 		//<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
-		$(".ct_list_pop td:nth-child(3)").on("click", function(){
-			self.location="/product/updateProduct?prodNo="+$(this).text().trim();
+		//console.log(menu);
+		
+		$(".ct_list_pop td:nth-child(3)").on("click",function(){
+			var prodNo = $(this).data("value");
+			if(${param.menu == 'manage'}){
+				self.location ="/product/updateProductView?prodNo="+prodNo;
+			}else{
+				self.location="/product/getProduct?prodNo="+prodNo;
+			}
 		});
 		
-		$(".ct_list_pop td:nth-child(3)").on("click", function(){
-			var prodNo = $(this).data("value");
-			//var prodNo = document.querySelector('#prodNumber');
-			console.log(prodNo);
-			self.location="/product/getProduct?prodNo="+prodNo;
-		});
+		$(".ct_list_pop td:nth-child(3)").css("color","red");
+		
+		$(".ct_list_pop:nth-child(4n+6)").css("background-color","whitesmoke");
+		
+		/*
+		if(${param.menu == 'manage'}){ 
+			$(".ct_list_pop td:nth-child(3)").on("click", function(){
+				var prodNo = $(this).data("value");
+				self.location="/product/updateProduct?prodNo="+prodNo;
+			});
+		}else {
+			$(".ct_list_pop td:nth-child(3)").on("click", function(){
+				var prodNo = $(this).data("value");
+				//var prodNo = document.querySelector('#prodNumber');
+				console.log(prodNo);
+				self.location="/product/getProduct?prodNo="+prodNo;
+			});
+		}*/
 	});
 	
 </script>
@@ -91,8 +100,7 @@
 							<option value="1"
 								${!empty search.searchCondition&&search.searchCondition==1 ? "selected":"" }>상품명</option>
 					</select> <input type="text" name="searchKeyword"
-						value="${! empty search.searchKeyword ? search.searchKeyword :"
-						"}"
+						value="${! empty search.searchKeyword ? search.searchKeyword :""}"
 				 class="ct_input_g" style="width: 200px; height: 20px">
 					</td>
 					<td align="right" width="70">

@@ -15,7 +15,7 @@
 	//<a href="/purchase/addPurchaseView?prodNo=${product.prodNo}">구매</a>
 	$(function(){
 		$("td.ct_btn01:contains('구매')").on("click", function(){
-			self.location="/purchase/addPurchaseView?prodNo="+${prodNo};
+			self.location="/purchase/addPurchaseView?prodNo=${product.prodNo}";
 		})
 	})
 </script>

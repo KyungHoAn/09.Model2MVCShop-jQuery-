@@ -14,27 +14,28 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 
-function fncAddProduct(){
-	//document.detailForm.action='/product/updateProduct';
-	//document.detailForm.submit();
-	$("form").attr("method","POST").attr("action","/product/updateProduct").submit();
-	
-	//<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-	//<a href="javascript:fncAddProduct();">수정</a>
+	function fncUpdateProduct(){
+		//document.detailForm.action='/product/updateProduct';
+		//document.detailForm.submit();
+		$("form").attr("method","POST").attr("action","/product/updateProduct").submit();
+		
+		//<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
+		//<a href="javascript:fncAddProduct();">수정</a>
+	}
 	$(function(){
 		$("td.ct_btn01:contains('수정')").on("click", function(){
-			fncAddProduct();
+			fncUpdateProduct();
 		});
+
 	});
 	
 	//<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
 	//<a href="javascript:history.go(-1)">취소</a>
-	$(function(){
+ 	$(function(){
 		$("td.ct_btn01:contains('취소')").on("click", function(){
 			history.go(-1);
 		});
 	});
-}
 
 </script>
 </head>
@@ -42,7 +43,7 @@ function fncAddProduct(){
 <body bgcolor="#ffffff" text="#000000">
 
 <!-- <form name="detailForm" method="post"> -->
-
+<form name="detailForm">
 <input type="hidden" name="prodNo" value="${product.prodNo}" />
 
 <table width="100%" height="37" border="0" cellpadding="0" cellspacing="0">

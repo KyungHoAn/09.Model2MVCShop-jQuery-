@@ -121,7 +121,7 @@ public class ProductController {
 	}
 	
 	//@RequestMapping("/updateProducView.do")
-	@RequestMapping(value="updateProduct", method=RequestMethod.GET)
+	@RequestMapping(value="updateProductView", method=RequestMethod.GET)
 	public String updateProduct(@RequestParam("prodNo") int prodNo, Model model) throws Exception {
 		System.out.println("/product/updateProduct : GET");
 		
