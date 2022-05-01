@@ -123,7 +123,7 @@ public class ProductController {
 	//@RequestMapping("/updateProducView.do")
 	@RequestMapping(value="updateProductView", method=RequestMethod.GET)
 	public String updateProduct(@RequestParam("prodNo") int prodNo, Model model) throws Exception {
-		System.out.println("/product/updateProduct : GET");
+		System.out.println("/product/updateProductView : GET");
 		
 		Product product = productService.getProduct(prodNo);
 		
